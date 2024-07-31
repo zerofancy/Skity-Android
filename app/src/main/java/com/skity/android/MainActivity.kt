@@ -2,49 +2,32 @@ package com.skity.android
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.skity.android.databinding.ActivityMain2Binding
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
-    private var mOpenGLExample: Button? = null
-    private var mOpenGLSVGExample: Button? = null
-    private var mOpenGLFrameExample: Button? = null
-    private var mVulkanSVGExample: Button? = null
-    private var mVulkanFrameExample: Button? = null
+class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMain2Binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_main2)
+        binding = ActivityMain2Binding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        mOpenGLExample = findViewById(R.id.gl_example)
-        mOpenGLSVGExample = findViewById(R.id.gl_svg_example)
-        mOpenGLFrameExample = findViewById(R.id.gl_frame_example)
-        mVulkanSVGExample = findViewById(R.id.vk_svg_example)
-        mVulkanFrameExample = findViewById(R.id.vk_frame_example)
-
-        mOpenGLExample?.setOnClickListener(this)
-        mOpenGLSVGExample?.setOnClickListener(this)
-        mOpenGLFrameExample?.setOnClickListener(this)
-        mVulkanSVGExample?.setOnClickListener(this)
-        mVulkanFrameExample?.setOnClickListener(this)
-    }
-
-    override fun onClick(view: View) {
-        val intent = Intent()
-        if (view === mOpenGLExample) {
-            intent.setClass(this, GLRenderActivity::class.java)
-        } else if (view === mOpenGLSVGExample) {
-            intent.setClass(this, GLSVGRenderActivity::class.java)
-        } else if (view === mOpenGLFrameExample) {
-            intent.setClass(this, GLFrameActivity::class.java)
-        } else if (view === mVulkanSVGExample) {
-            intent.setClass(this, VkSVGActivity::class.java)
-        } else if (view === mVulkanFrameExample) {
-            intent.setClass(this, VkFrameActivity::class.java)
+        binding.glExample.setOnClickListener {
+            startActivity(Intent(this, GLRenderActivity::class.java))
         }
-
-        this.startActivity(intent)
+        binding.glSvgExample.setOnClickListener {
+            startActivity(Intent(this, GLSVGRenderActivity::class.java))
+        }
+        binding.glFrameExample.setOnClickListener {
+            startActivity(Intent(this, GLFrameActivity::class.java))
+        }
+        binding.vkSvgExample.setOnClickListener {
+            startActivity(Intent(this, VkSVGActivity::class.java))
+        }
+        binding.vkFrameExample.setOnClickListener {
+            startActivity(Intent(this, VkFrameActivity::class.java))
+        }
     }
 }
